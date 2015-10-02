@@ -1,8 +1,8 @@
 from selenium import webdriver
 from urllib.parse import urlparse
 from datetime import datetime
-
-
+from django.conf import settings
+import os
 class BasePage(object):
 
     def __init__(self, url=None):
@@ -25,11 +25,13 @@ class BasePage(object):
 
 
 def get_screenshot_from_url(url, width=1200, height=724):
+    if not os.path.exists(settings.MEDIA_ROOT):
+        os.makedirs(settings.MEDIA_ROOT)
     parser = urlparse(url)
     domain = parser.netloc
     filename = '{}-{}.png'.format(domain, datetime.now())
     driver = webdriver.PhantomJS()
     driver.get(url)
     driver.set_window_size(width=width, height=height)
-    driver.get_screenshot_as_file(filename)
+    driver.get_screenshot_as_file(os.path.join(settings.MEDIA_ROOT, filename))
     return filename
