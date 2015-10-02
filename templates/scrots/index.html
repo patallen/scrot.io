@@ -3,5 +3,10 @@
 		<title>scrot.io</title>
 	</head>
 	<body>
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input value="Submit" type="submit">
+		</form>
 	</body>
 </html>
