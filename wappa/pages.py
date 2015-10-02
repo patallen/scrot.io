@@ -2,6 +2,7 @@ from selenium import webdriver
 from urllib.parse import urlparse
 from datetime import datetime
 from django.conf import settings
+from scrots.models import Scrot
 import os
 class BasePage(object):
 
