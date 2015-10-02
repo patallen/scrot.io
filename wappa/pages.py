@@ -1,13 +1,14 @@
 from selenium import webdriver
-from urlparse import urlparse
+from urllib.parse import urlparse
 from datetime import datetime
+
 
 class BasePage(object):
 
     def __init__(self, url=None):
         self.dims = {'width': 1280, 'height': 800}
         self.url = url
-    
+
     def get_filename(self):
         if not self.url:
             raise ValueError("URL not specified.")
@@ -22,3 +23,13 @@ class BasePage(object):
         driver.get_screenshot_as_file(self.get_filename())
         return self.get_filename()
 
+
+def get_screenshot_from_url(url, width=1200, height=724):
+    parser = urlparse(url)
+    domain = parser.netloc
+    filename = '{}-{}.png'.format(domain, datetime.now())
+    driver = webdriver.PhantomJS()
+    driver.get(url)
+    driver.set_window_size(width=width, height=height)
+    driver.get_screenshot_as_file(filename)
+    return filename
