@@ -4,6 +4,9 @@ from datetime import datetime
 from django.conf import settings
 from scrots.models import Scrot
 import os
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+
 class BasePage(object):
 
     def __init__(self, url=None):
@@ -25,17 +28,34 @@ class BasePage(object):
         return self.get_filename()
 
 
-def get_screenshot_from_url(url, width=1200, height=724):
+def get_screenshot_from_url(url, width=1280, height=800):
+
+    # user_agent = (
+
+    #     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) " +
+    #     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"
+    # )
+
+    # dcap = dict(DesiredCapabilities.PHANTOMJS)
+    # dcap["phantomjs.page.settings.userAgent"] = user_agent
+    driver = webdriver.PhantomJS()
+
     if not os.path.exists(settings.MEDIA_ROOT):
         os.makedirs(settings.MEDIA_ROOT)
     parser = urlparse(url)
     domain = parser.netloc
     filename = '{}{}.png'.format(domain, datetime.now().strftime('%s'))
-    driver = webdriver.PhantomJS()
-    driver.get(url)
     driver.set_window_size(width=width, height=height)
+    driver.get(url)
     filepath = os.path.join(settings.MEDIA_ROOT, filename)
     driver.save_screenshot(filepath)
-    Scrot.objects.create(domain=domain, scrot_file=filename)
 
-    return filename
+    # Create Scrot in DB
+    print("saving to database...")
+    scrot = Scrot.objects.create(
+        domain=domain,
+        scrot_file=filename,
+        width=width,
+        height=height
+    )
+    return scrot
