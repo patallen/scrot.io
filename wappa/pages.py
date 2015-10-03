@@ -30,9 +30,12 @@ def get_screenshot_from_url(url, width=1200, height=724):
         os.makedirs(settings.MEDIA_ROOT)
     parser = urlparse(url)
     domain = parser.netloc
-    filename = '{}-{}.png'.format(domain, datetime.now())
+    filename = '{}{}.png'.format(domain, datetime.now().strftime('%s'))
     driver = webdriver.PhantomJS()
     driver.get(url)
     driver.set_window_size(width=width, height=height)
-    driver.get_screenshot_as_file(os.path.join(settings.MEDIA_ROOT, filename))
+    filepath = os.path.join(settings.MEDIA_ROOT, filename)
+    driver.save_screenshot(filepath)
+    Scrot.objects.create(domain=domain, scrot_file=filename)
+
     return filename
