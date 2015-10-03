@@ -29,16 +29,15 @@ class BasePage(object):
 
 
 def get_screenshot_from_url(url, width=1280, height=800):
+    user_agent = (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) " +
+        "AppleWebKit/537.36 (KHTML, like Gecko) " +
+        "Chrome/45.0.2454.101 Safari/537.36"
+    )
 
-    # user_agent = (
-
-    #     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) " +
-    #     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.57 Safari/537.36"
-    # )
-
-    # dcap = dict(DesiredCapabilities.PHANTOMJS)
-    # dcap["phantomjs.page.settings.userAgent"] = user_agent
-    driver = webdriver.PhantomJS()
+    dcap = dict(DesiredCapabilities.PHANTOMJS)
+    dcap["phantomjs.page.settings.userAgent"] = user_agent
+    driver = webdriver.PhantomJS(desired_capabilities=dcap)
 
     if not os.path.exists(settings.MEDIA_ROOT):
         os.makedirs(settings.MEDIA_ROOT)
@@ -51,7 +50,6 @@ def get_screenshot_from_url(url, width=1280, height=800):
     driver.save_screenshot(filepath)
 
     # Create Scrot in DB
-    print("saving to database...")
     scrot = Scrot.objects.create(
         domain=domain,
         scrot_file=filename,
