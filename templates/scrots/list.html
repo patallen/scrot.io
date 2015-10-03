@@ -1,0 +1,10 @@
+<h2>Recent Scrots</h2>
+<hr>
+{% for obj in object_list %}
+<div>
+	<a href="{% url 'scrot_detail' pk=obj.id %}">
+		<img src="/media/{{obj.scrot_file}}" alt="{{ obj.domain }}" width="200">
+	</a>
+	<p>{{obj.domain}}</p>
+</div>
+{% endfor %}
