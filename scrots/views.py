@@ -18,4 +18,3 @@ class RecentScrotsView(ListView):
 class ScrotDetailView(DetailView):
     template_name = 'scrots/detail.html'
     queryset = Scrot.objects.all()
-
