@@ -2,7 +2,7 @@ from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
 from scrots.forms import UrlScrotForm
 from .models import Scrot
-from wappa.pages import get_screenshot_from_url
+from screenshotter.handlers import ScrotHandler
 
 
 class HomePageView(FormView):
@@ -10,9 +10,10 @@ class HomePageView(FormView):
     template_name = 'scrots/index.html'
 
     def form_valid(self, form):
-        print("Form was valid")
         url = form.data['url']
-        self.scrot = get_screenshot_from_url(url)
+        scrot = ScrotHandler(url)
+        scrot.create_images()
+        self.scrot = scrot.save_to_db()
         return super(HomePageView, self).form_valid(form)
 
     def get_success_url(self):

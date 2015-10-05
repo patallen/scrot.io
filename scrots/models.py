@@ -1,5 +1,5 @@
 from django.db import models
-
+import re
 
 class Scrot(models.Model):
     height = models.IntegerField(blank=False)
@@ -10,12 +10,10 @@ class Scrot(models.Model):
     date_taken = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{}: {}'.format(self.domain, self.date_taken.strftime('%H'))
+        return '{}: {}'.format(self.domain, self.date_taken.strftime('%s'))
 
     def get_screen_image(self):
-        fn, ext = str(self.scrot_file).rsplit('.', 1)
-        return '{}_screen.{}'.format(fn, ext)
+        return re.sub('_full', '_screen', str(self.scrot_file))
 
     def get_thumb_image(self):
-        fn, ext = str(self.scrot_file).rsplit('.', 1)
-        return '{}_thumb.{}'.format(fn, ext)
+        return re.sub('_full', '_thumb', str(self.scrot_file))
