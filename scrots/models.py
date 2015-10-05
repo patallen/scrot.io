@@ -11,3 +11,11 @@ class Scrot(models.Model):
 
     def __str__(self):
         return '{}: {}'.format(self.domain, self.date_taken.strftime('%H'))
+
+    def get_screen_image(self):
+        fn, ext = str(self.scrot_file).rsplit('.', 1)
+        return '{}_screen.{}'.format(fn, ext)
+
+    def get_thumb_image(self):
+        fn, ext = str(self.scrot_file).rsplit('.', 1)
+        return '{}_thumb.{}'.format(fn, ext)
