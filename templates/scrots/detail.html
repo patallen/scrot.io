@@ -1,3 +1,6 @@
-<div>
-	<img src="/media/{{ object.scrot_file }}">
-</div>
+{% extends 'base.html' %}
+{% block content %}
+	<div>
+		<img src="/media/{{ object.scrot_file }}">
+	</div>
+{% endblock %}
