@@ -1,8 +1,10 @@
+from django.core.urlresolvers import reverse
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
-from scrots.forms import UrlScrotForm
-from .models import Scrot
+
 from screenshotter.handlers import ScrotHandler
+from .forms import UrlScrotForm
+from .models import Scrot
 
 
 class HomePageView(FormView):
@@ -17,7 +19,7 @@ class HomePageView(FormView):
         return super(HomePageView, self).form_valid(form)
 
     def get_success_url(self):
-        url = '/scrot/{}'.format(self.scrot.id)
+        url = reverse('scrot_detail', kwargs={'pk': self.scrot.id})
         return url
 
 
