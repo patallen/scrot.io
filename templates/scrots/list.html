@@ -4,17 +4,19 @@
 	.scrot-box{
 		float: left;
 		margin: 5px;
-		border: 1px solid tomato;
+		text-align: center
 	}
 	</style>
 	<h2>Recent Scrots</h2>
 	<hr>
-	{% for obj in object_list %}
-	<div class="scrot-box">
-		<a href="{% url 'scrot_detail' pk=obj.id %}">
-			<img src="/media/{{obj.get_thumb_image }}" alt="{{ obj.domain }}" width="200">
-		</a>
-		<p>{{obj.domain}}</p>
+	<div class="row">
+		{% for obj in object_list %}
+		<div class="scrot-box">
+			<a href="{% url 'scrot_detail' pk=obj.id %}">
+				<img src="/media/{{ obj.get_thumb_image }}" alt="{{ obj.domain }}" width="200">
+			</a>
+			<p><a href="http://{{ obj.domain }}/">{{ obj.domain }}</p>
+		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
 {% endblock %}

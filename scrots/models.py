@@ -1,6 +1,7 @@
 from django.db import models
 import re
 
+
 class Scrot(models.Model):
     height = models.IntegerField(blank=False)
     width = models.IntegerField(blank=False)

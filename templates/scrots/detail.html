@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-	<div>
-		<img src="/media/{{ object.scrot_file }}">
+	<div class="screen">
+		<img src="/media/{{ object.get_screen_image}}" width=500>
 	</div>
 {% endblock %}
