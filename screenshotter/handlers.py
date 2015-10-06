@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 from datetime import datetime
 import os
 from PIL import Image
@@ -8,16 +8,17 @@ from PIL import Image
 from django.conf import settings
 from scrots.models import Scrot
 
+from django.core.validators import URLValidator
+
 
 class ScrotHandler:
     def __init__(self, url, ext='png', width=1280, height=800):
         self.base_path = settings.MEDIA_ROOT
         self.ext = ext
-        self.url = url
+        self.url = self._get_url(url)
         self.width = width
         self.height = height
         self.timestamp = datetime.now()
-        self.domain = self._get_domain()
         self.basefn = '%s%s' % (self.domain, self.timestamp.strftime('%s'))
         self.user_agent = (
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) " +
@@ -27,11 +28,20 @@ class ScrotHandler:
         dcap = dict(DesiredCapabilities.PHANTOMJS)
         dcap["phantomjs.page.settings.userAgent"] = self.user_agent
         self.driver = webdriver.PhantomJS(desired_capabilities=dcap,
-                                     service_args=['--ssl-protocol=any'])
+                                          service_args=['--ssl-protocol=any'])
 
-    def _get_domain(self):
-        parser = urlparse(self.url)
-        return parser.netloc
+    def _get_url(self, url):
+        valid_url = url
+        if url[:4] != 'http':
+            valid_url = 'http://' + url
+        val = URLValidator()
+        try:
+            val(valid_url)
+        except Exception as e:
+            print(e)
+        p = urlparse(valid_url)
+        self.domain = p.netloc
+        return urlunparse((p.scheme, p.netloc, '/', '', '', ''))
 
     def _get_fn(self, postfix):
         return '{}_{}.{}'.format(self.basefn, postfix, self.ext)
