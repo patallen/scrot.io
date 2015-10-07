@@ -25,7 +25,7 @@ class HomePageView(FormView):
 
 class RecentScrotsView(ListView):
     template_name = 'scrots/list.html'
-    queryset = Scrot.objects.all()
+    queryset = Scrot.objects.order_by('-date_taken')
 
 
 class ScrotDetailView(DetailView):
