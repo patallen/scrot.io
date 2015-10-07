@@ -12,6 +12,18 @@ class Website(models.Model):
         return self.domain
 
 
+class Snapshot(models.Model):
+    website = models.ForeignKey(Website)
+    date_taken = models.DateTimeField(auto_now_add=True)
+    img_full = models.ImageField(blank=False)
+    img_screen = models.ImageField(blank=False)
+    img_thumb = models.ImageField(blank=False)
+
+    def __str__(self):
+        date = self.date_taken.strftime('%m-%e-%Y')
+        return '{} {}'.format(self.website, date)
+
+
 class Scrot(models.Model):
     height = models.IntegerField(blank=False)
     width = models.IntegerField(blank=False)
