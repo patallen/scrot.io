@@ -20,8 +20,8 @@ class Snapshot(models.Model):
     img_thumb = models.ImageField(blank=False)
 
     def __str__(self):
-        date = self.date_taken.strftime('%m-%e-%Y')
-        return '{} {}'.format(self.website, date)
+        date = self.date_taken.strftime('%m-%d-%Y')
+        return '{} on {}'.format(str(self.website).capitalize(), date)
 
 
 class Scrot(models.Model):

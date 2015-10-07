@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import Scrot
+from .models import Scrot, Website, Snapshot
 
-# Register your models here.
+
+class SnapshotInline(admin.StackedInline):
+    model = Snapshot
+
+
+class WebsiteAdmin(admin.ModelAdmin):
+    inlines = (SnapshotInline,)
+
+
 admin.site.register(Scrot)
+admin.site.register(Website, WebsiteAdmin)
+admin.site.register(Snapshot)
