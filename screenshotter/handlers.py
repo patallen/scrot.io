@@ -13,7 +13,7 @@ from django.core.validators import URLValidator
 
 
 class ScrotHandler:
-    def __init__(self, url, ext='png', width=1280, height=800):
+    def __init__(self, url, ext='png', width=1366, height=768):
         self.base_path = settings.MEDIA_ROOT
         self.ext = ext
         self.url = self._get_url(url)
@@ -36,10 +36,7 @@ class ScrotHandler:
         if url[:4] != 'http':
             valid_url = 'http://' + url
         val = URLValidator()
-        try:
-            val(valid_url)
-        except Exception as e:
-            print(e)
+        val(valid_url)
         p = urlparse(valid_url)
         self.domain = p.netloc
         return urlunparse((p.scheme, p.netloc, '/', '', '', ''))
@@ -65,8 +62,7 @@ class ScrotHandler:
 
     def thumb(self):
         self.thumb = self.cropped
-        self.thumb.thumbnail((640, 360))
-        self.thumb.thumbnail((320, 180), Image.ANTIALIAS)
+        self.thumb.thumbnail((320, 180))
         filepath = os.path.join(self.base_path, self._get_fn('thumb'))
         self.thumb.save(filepath)
 
