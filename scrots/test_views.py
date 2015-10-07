@@ -14,10 +14,10 @@ class ScrotsViewsTestCase(TestCase):
 
     def test_index(self):
         res = self.client.get('/')
-        form_url = '<input id="id_url" name="url" type="text" />'
+        form_url = 'id="id_url" name="url" type="text"'
         self.assertEquals(res.status_code, 200)
         self.assertTemplateUsed(res, 'scrots/index.html')
-        self.assertContains(res, 'scrot.io')
+        self.assertContains(res, 'Scrot.io')
         self.assertContains(res, form_url)
 
     def test_recent_list(self):
