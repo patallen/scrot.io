@@ -1,5 +1,5 @@
-from django.db import models
 import re
+from django.db import models
 
 
 class Website(models.Model):
@@ -10,6 +10,12 @@ class Website(models.Model):
 
     def __str__(self):
         return self.domain
+
+    def get_latest_snapshot(self):
+        return self.snapshot_set.latest()
+
+    def add_snapshot(self):
+        self.snapshot_set.create()
 
 
 class Snapshot(models.Model):
@@ -22,6 +28,9 @@ class Snapshot(models.Model):
     def __str__(self):
         date = self.date_taken.strftime('%m-%d-%Y')
         return '{} on {}'.format(str(self.website).capitalize(), date)
+
+    class Meta:
+        get_latest_by = 'date_taken'
 
 
 class Scrot(models.Model):
