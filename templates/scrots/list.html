@@ -3,15 +3,15 @@
 	<style>
 	.scrot-box{
 		float: left;
-		margin: 5px;
-		text-align: center
+		text-align: center;
 	}
+    .scrot-box img { width: 100%}
 	</style>
 	<h2>Recent Scrots</h2>
 	<hr>
 	<div class="row">
 		{% for obj in object_list %}
-		<div class="scrot-box">
+		<div class="scrot-box col-md-4 col-xs-12 col-sm-6">
 			<a href="{% url 'website_detail' pk=obj.id %}">
 				<img src="/media/{{ obj.latest_snapshot.img_thumb }}" width="200">
 			</a>
