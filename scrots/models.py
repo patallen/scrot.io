@@ -1,5 +1,6 @@
 import re
 from django.db import models
+from screenshotter.handlers import ScrotHandler
 
 
 class Website(models.Model):
@@ -15,7 +16,13 @@ class Website(models.Model):
         return self.snapshot_set.latest()
 
     def add_snapshot(self):
-        self.snapshot_set.create()
+        hdl = ScrotHandler(self.domain)
+        hdl.create_images()
+        snapshot = self.snapshot_set.create()
+        snapshot.img_full = hdl.full_fn
+        snapshot.img_screen = hdl.screen_fn
+        snapshot.img_thumb = hdl.thumb_fn
+        snapshot.save()
 
 
 class Snapshot(models.Model):

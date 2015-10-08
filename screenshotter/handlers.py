@@ -1,15 +1,13 @@
-from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from urllib.parse import urlparse, urlunparse
+from PIL import Image
 from datetime import datetime
+from urllib.parse import urlparse, urlunparse
 import os
 import io
-from PIL import Image
 
 from django.conf import settings
-from scrots.models import Scrot
-
 from django.core.validators import URLValidator
+from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 class ScrotHandler:
@@ -50,32 +48,26 @@ class ScrotHandler:
 
         self.driver.set_window_size(width=self.width, height=self.height)
         self.driver.get(self.url)
-        filepath = os.path.join(settings.MEDIA_ROOT, self._get_fn('full'))
+        self.full_fn = self._get_fn('full')
+        filepath = os.path.join(settings.MEDIA_ROOT, self.full_fn)
         stream = io.BytesIO(self.driver.get_screenshot_as_png())
         self.screenshot = Image.open(stream)
         self.screenshot.save(filepath)
 
     def crop(self):
+        self.screen_fn = self._get_fn('screen')
         self.cropped = self.screenshot.crop((0, 0, self.width, self.height))
-        new_filepath = os.path.join(self.base_path, self._get_fn('screen'))
-        self.cropped.save(new_filepath)
+        filepath = os.path.join(self.base_path, self.screen_fn)
+        self.cropped.save(filepath)
 
     def thumb(self):
+        self.thumb_fn = self._get_fn('thumb')
         self.thumb = self.cropped
         self.thumb.thumbnail((320, 180))
-        filepath = os.path.join(self.base_path, self._get_fn('thumb'))
+        filepath = os.path.join(self.base_path, self.thumb_fn)
         self.thumb.save(filepath)
 
     def create_images(self):
         self.load()
         self.crop()
         self.thumb()
-
-    def save_to_db(self):
-        scrot = Scrot.objects.create(
-            domain=self.domain,
-            scrot_file=self._get_fn('full'),
-            width=self.width,
-            height=self.height
-        )
-        return scrot
