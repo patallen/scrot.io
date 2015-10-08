@@ -12,10 +12,10 @@
 	<div class="row">
 		{% for obj in object_list %}
 		<div class="scrot-box">
-			<a href="{% url 'scrot_detail' pk=obj.id %}">
-				<img src="/media/{{ obj.get_thumb_image }}" alt="{{ obj.domain }}" width="200">
+			<a href="{% url 'website_detail' pk=obj.id %}">
+				<img src="/media/{{ obj.latest_snapshot.img_thumb }}" width="200">
 			</a>
-			<p><a href="http://{{ obj.domain }}/">{{ obj.domain }}</p>
+            <p><a href="http://{{ obj.domain }}/">{{ obj.domain }}</a></p>
 		</div>
 		{% endfor %}
 	</div>

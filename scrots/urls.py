@@ -1,12 +1,12 @@
 from django.conf.urls import url
-from .views import HomePageView, RecentScrotsView, ScrotDetailView
+from .views import HomePageView, RecentScrotsView, WebsiteDetailView
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home_page'),
     url(r'^recent/$', RecentScrotsView.as_view(), name='recent_list'),
     url(
-        r'^scrot/(?P<pk>[0-9]+)/$',
-        ScrotDetailView.as_view(),
-        name='scrot_detail'
+        r'^site/(?P<pk>[0-9]+)/$',
+        WebsiteDetailView.as_view(),
+        name='website_detail'
     ),
 ]

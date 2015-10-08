@@ -12,7 +12,7 @@ class Website(models.Model):
     def __str__(self):
         return self.domain
 
-    def get_latest_snapshot(self):
+    def latest_snapshot(self):
         return self.snapshot_set.latest()
 
     def add_snapshot(self):

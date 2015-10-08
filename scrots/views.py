@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 
 from screenshotter.handlers import ScrotHandler
 from .forms import UrlScrotForm
-from .models import Scrot
+from .models import Scrot, Website
 
 
 class HomePageView(FormView):
@@ -14,20 +14,21 @@ class HomePageView(FormView):
     def form_valid(self, form):
         url = form.data['url']
         scrot = ScrotHandler(url)
-        scrot.create_images()
-        self.scrot = scrot.save_to_db()
+        domain = scrot.domain
+        self.website, _ = Website.objects.get_or_create(domain=domain)
+        self.website.add_snapshot()
         return super(HomePageView, self).form_valid(form)
 
     def get_success_url(self):
-        url = reverse('scrot_detail', kwargs={'pk': self.scrot.id})
+        url = reverse('website_detail', kwargs={'pk': self.website.id})
         return url
 
 
 class RecentScrotsView(ListView):
     template_name = 'scrots/list.html'
-    queryset = Scrot.objects.order_by('-date_taken')
+    queryset = Website.objects.order_by('-create_date')
 
 
-class ScrotDetailView(DetailView):
+class WebsiteDetailView(DetailView):
     template_name = 'scrots/detail.html'
-    queryset = Scrot.objects.all()
+    queryset = Website.objects.all()
