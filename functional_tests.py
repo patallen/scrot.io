@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
@@ -11,17 +12,21 @@ class NewVisitorTest(unittest.TestCase):
 
     def test_user_can_enter_url_and_receive_collection(self):
         # Jane navigties to http://scrot.io/ in her web browser.
-        self.browser.get('http://localhost:5000')
+        self.browser.get('http://localhost:5000/')
 
         # She is presented with an input that will allow her to enter any url.
-        self.assertIn('scrot.io', self.browser.title)
+        self.assertIn('Scrot.io', self.browser.title)
 
         # She enters the URL http://google.com/ and hits enter
         input = self.browser.find_element_by_id('id_url')
+        input.send_keys('http://google.com/')
+        input.send_keys(Keys.ENTER)
+        body = self.browser.find_element_by_tag_name('body')
+        self.assertIn('screen.png', body)
         self.fail("Finish the tests!.")
 
         # She is then presented with a spinner indicating that she should wait.
-        # Soon enough, the spinner stops and she is redirected to a page that displays (X) screenshots of the URL she requested.
+        # Soon enough, the spinner stops and she is redirected to a page that displays a screenshot of the URL she requested.
 
 if __name__ == '__main__':
     unittest.main()
