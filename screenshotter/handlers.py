@@ -60,9 +60,16 @@ class ScrotHandler:
         filepath = os.path.join(self.base_path, self.screen_fn)
         self.cropped.save(filepath)
 
+    def small(self):
+        self.small_fn = self._get_fn('small')
+        self.small = self.cropped.copy()
+        self.small.thumbnail((512, 288))
+        filepath = os.path.join(self.base_path, self.small_fn)
+        self.small.save(filepath)
+
     def thumb(self):
         self.thumb_fn = self._get_fn('thumb')
-        self.thumb = self.cropped
+        self.thumb = self.cropped.copy()
         self.thumb.thumbnail((320, 180))
         filepath = os.path.join(self.base_path, self.thumb_fn)
         self.thumb.save(filepath)
@@ -70,4 +77,5 @@ class ScrotHandler:
     def create_images(self):
         self.load()
         self.crop()
+        self.small()
         self.thumb()

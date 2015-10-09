@@ -21,6 +21,7 @@ class Website(models.Model):
         snapshot = self.snapshot_set.create()
         snapshot.img_full = hdl.full_fn
         snapshot.img_screen = hdl.screen_fn
+        snapshot.img_small = hdl.small_fn
         snapshot.img_thumb = hdl.thumb_fn
         snapshot.save()
 
@@ -30,6 +31,7 @@ class Snapshot(models.Model):
     date_taken = models.DateTimeField(auto_now_add=True)
     img_full = models.ImageField(blank=False)
     img_screen = models.ImageField(blank=False)
+    img_small = models.ImageField(blank=False)
     img_thumb = models.ImageField(blank=False)
 
     def __str__(self):
