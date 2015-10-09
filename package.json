@@ -1,0 +1,23 @@
+{
+  "name": "scrot.io",
+  "version": "0.0.1",
+  "description": "Take, share, and organize website screenshots over time.",
+  "main": "/",
+  "scripts": {
+    "test": "python manage.py test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/patallen/scrot.io"
+  },
+  "author": "Patrick Allen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/patallen/scrot.io/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-sass": "~2.0.4",
+    "gulp": "~3.9.0"
+  }
+}

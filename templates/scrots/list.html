@@ -1,19 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-	<style>
-	.scrot-box{
-		float: left;
-		text-align: center;
-	}
-    .scrot-box img { width: 100%}
-	</style>
 	<h2>Recent Scrots</h2>
 	<hr>
 	<div class="row">
 		{% for obj in object_list %}
 		<div class="scrot-box col-md-4 col-xs-12 col-sm-6">
 			<a href="{% url 'website_detail' pk=obj.id %}">
-				<img src="/media/{{ obj.latest_snapshot.img_small }}" width="200">
+				<img src="/media/{{ obj.latest_snapshot.img_thumb }}" width="200">
 			</a>
             <p><a href="http://{{ obj.domain }}/">{{ obj.domain }}</a></p>
 		</div>

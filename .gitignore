@@ -6,3 +6,6 @@ __pycache__
 db.sqlite3
 media/*
 .coverage
+static/components
+static/css
+node_modules
