@@ -7,7 +7,7 @@
 		<div class="col-md-4 col-xs-12 col-sm-6">
             <div class="scrot-box">
                 <a href="{% url 'website_detail' pk=obj.id %}">
-                    <img src="/media/{{ obj.latest_snapshot.img_thumb }}" width="200">
+                    <img src="/media/{{ obj.latest_snapshot.img_small }}">
                 </a>
                 <div class="scrot-metadata">
                     <a href="http://{{ obj.domain }}/">{{ obj.domain }}</a>
