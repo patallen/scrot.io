@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 
 from screenshotter.handlers import ScrotHandler
 from .forms import UrlScrotForm
-from .models import Scrot, Website
+from .models import Website, Snapshot
 
 
 class HomePageView(FormView):
@@ -32,3 +32,20 @@ class RecentScrotsView(ListView):
 class WebsiteDetailView(DetailView):
     template_name = 'scrots/detail.html'
     queryset = Website.objects.all()
+
+
+class TimelineView(ListView):
+    """
+    Returns a list of snapshots based on the website PK provided in the URL.
+    We override get_context_data to add the website as 'object' in context.
+    """
+    template_name = 'scrots/timeline.html'
+
+    def get_queryset(self, *args, **kwargs):
+        self.object = Website.objects.filter(id=self.kwargs['pk']).first()
+        return self.object.snapshot_set.order_by('-date_taken')
+
+    def get_context_data(self, **kwargs):
+        context = super(TimelineView, self).get_context_data(**kwargs)
+        context['object'] = self.object
+        return context
