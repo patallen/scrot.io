@@ -15,11 +15,6 @@ class Website(models.Model):
     def latest_snapshot(self):
         return self.snapshot_set.latest()
 
-    def latest_thumb(self):
-        thumb = self.latest_snapshot().img_thumb
-        return '<img src="/media/{}" width=100>'.format(thumb)
-    latest_thumb.allow_tags = True
-
     def add_snapshot(self):
         hdl = ScrotHandler(self.domain)
         hdl.create_images()
@@ -29,6 +24,11 @@ class Website(models.Model):
         snapshot.img_small = hdl.small_fn
         snapshot.img_thumb = hdl.thumb_fn
         snapshot.save()
+
+    def admin_thumb(self):
+        thumb = self.latest_snapshot().img_thumb
+        return '<img src="/media/{}" width=100>'.format(thumb)
+    admin_thumb.allow_tags = True
 
 
 class Snapshot(models.Model):

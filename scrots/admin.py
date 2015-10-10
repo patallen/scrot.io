@@ -8,7 +8,7 @@ class SnapshotInline(admin.StackedInline):
 
 class WebsiteAdmin(admin.ModelAdmin):
     inlines = (SnapshotInline,)
-    list_display = ['latest_thumb', 'domain', 'create_date', 'update_date']
+    list_display = ['admin_thumb', 'domain', 'create_date', 'update_date']
 
 
 admin.site.register(Scrot)
