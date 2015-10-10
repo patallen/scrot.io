@@ -15,6 +15,11 @@ class Website(models.Model):
     def latest_snapshot(self):
         return self.snapshot_set.latest()
 
+    def latest_thumb(self):
+        thumb = self.latest_snapshot().img_thumb
+        return '<img src="/media/{}" width=100>'.format(thumb)
+    latest_thumb.allow_tags = True
+
     def add_snapshot(self):
         hdl = ScrotHandler(self.domain)
         hdl.create_images()
