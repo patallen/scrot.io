@@ -1,33 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Timeline for {{ object.domain }}</h2>
-	<hr>
-	<div class="row">
-		{% for obj in object_list %}
-		<div class="row timeline-row">
-		{% if forloop.counter|divisibleby:2 %}
-			<div class="col-lg-6">
-				<div class="website-img-full">
-					<img src="/media/{{ obj.img_screen }}">
-				</div>
-			</div>
-			<div class="col-lg-6 text-center">
-				{{ obj.date_taken }}
-			</div>
-			{% else %}
-			<div class="col-lg-6 text-center">
-				{{ obj.date_taken }}
-			</div>
-			<div class="col-lg-6">
-				<div class="website-img-full">
-					<img src="/media/{{ obj.img_screen }}">
-				</div>
-			</div>
-		{% endif %}
-		</div>
-		{% endfor %}
-		<div class="col-lg-4">
-			<h3>{{ object.domain }}</h3>
+<hr>
+{% for obj in object_list %}
+<div class="row timeline-row">
+{% if forloop.counter|divisibleby:2 %}
+	<div class="col-lg-6">
+		<div class="website-img-full">
+			<img src="/media/{{ obj.img_screen }}">
 		</div>
 	</div>
+	<div class="col-lg-6 text-center">
+		{{ obj.date_taken }}
+	</div>
+	{% else %}
+	<div class="col-lg-6 text-center">
+		{{ obj.date_taken }}
+	</div>
+	<div class="col-lg-6">
+		<div class="website-img-full">
+			<img src="/media/{{ obj.img_screen }}">
+		</div>
+	</div>
+{% endif %}
+</div>
+{% endfor %}
 {% endblock %}

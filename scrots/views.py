@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 
 from screenshotter.handlers import ScrotHandler
 from .forms import UrlScrotForm
-from .models import Website, Snapshot
+from .models import Website
 
 
 class HomePageView(FormView):
