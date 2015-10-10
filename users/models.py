@@ -9,9 +9,19 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=32, blank=False, unique=True)
     date_joined = models.DateField(default=timezone.now)
 
+    first_name = models.CharField(max_length=128)
+    last_name = models.CharField(max_length=128)
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     REQUIRED_FIELDS = ['username', ]
     USERNAME_FIELD = 'email'
     objects = UserManager()
+
+    def get_full_name(self):
+        """
+        Returns the first name plus the last name with a space in between.
+        """
+        full_name = '{} {}'.format(self.first_name, self.last_name)
+        return full_name.strip()
