@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from .views import (
-    HomePageView, RecentScrotsView, WebsiteDetailView, TimelineView
+    HomePageView, RecentScrotsView, WebsiteDetailView,
+    TimelineView, SnapshotDetailView
 )
 
 urlpatterns = [
@@ -15,5 +16,10 @@ urlpatterns = [
         r'^site/(?P<pk>[0-9]+)/timeline/$',
         TimelineView.as_view(),
         name='website_timeline'
+    ),
+    url(
+        r'^snapshot/(?P<pk>[0-9]+)/$',
+        SnapshotDetailView.as_view(),
+        name='snapshot_detail'
     ),
 ]

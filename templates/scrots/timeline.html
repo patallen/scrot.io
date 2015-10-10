@@ -7,7 +7,9 @@
 {% if forloop.counter|divisibleby:2 %}
 	<div class="col-lg-6">
 		<div class="website-img-full">
-			<img src="/media/{{ obj.img_screen }}">
+			<a href="{% url 'snapshot_detail' pk=obj.id  %}">
+				<img src="/media/{{ obj.img_screen }}">
+			</a>
 		</div>
 	</div>
 	<div class="col-lg-6 text-center">
@@ -19,7 +21,9 @@
 	</div>
 	<div class="col-lg-6">
 		<div class="website-img-full">
-			<img src="/media/{{ obj.img_screen }}">
+			<a href="{% url 'snapshot_detail' pk=obj.id  %}">
+				<img src="/media/{{ obj.img_screen }}">
+			</a>
 		</div>
 	</div>
 {% endif %}

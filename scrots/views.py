@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 
 from screenshotter.handlers import ScrotHandler
 from .forms import UrlScrotForm
-from .models import Website
+from .models import Website, Snapshot
 
 
 class HomePageView(FormView):
@@ -49,3 +49,8 @@ class TimelineView(ListView):
         context = super(TimelineView, self).get_context_data(**kwargs)
         context['object'] = self.object
         return context
+
+
+class SnapshotDetailView(DetailView):
+    model = Snapshot
+    template_name = 'scrots/snapshot.html'
