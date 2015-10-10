@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Scrot, Website, Snapshot
+from .models import Website, Snapshot
 
 
 class SnapshotInline(admin.StackedInline):
@@ -11,6 +11,5 @@ class WebsiteAdmin(admin.ModelAdmin):
     list_display = ['admin_thumb', 'domain', 'create_date', 'update_date']
 
 
-admin.site.register(Scrot)
 admin.site.register(Website, WebsiteAdmin)
 admin.site.register(Snapshot)
