@@ -9,8 +9,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=32, blank=False, unique=True)
     date_joined = models.DateField(default=timezone.now)
 
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
+    first_name = models.CharField(max_length=128, blank=True)
+    last_name = models.CharField(max_length=128, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -25,3 +25,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """
         full_name = '{} {}'.format(self.first_name, self.last_name)
         return full_name.strip()
+
+    def get_short_name(self):
+        return self.first_name.strip()
