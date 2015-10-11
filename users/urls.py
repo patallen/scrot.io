@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
 
+from .views import ProfileView
+
 urlpatterns = [
     url(
         r'^login/$', login,
@@ -12,4 +14,7 @@ urlpatterns = [
         {'next_page': '/'},
         name='logout',
     ),
+    url(
+        r'^user/(?P<username>[\w]+)/$', ProfileView.as_view(), name='user_profile'
+    )
 ]

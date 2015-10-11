@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Profile for {{ object.username }}</h2>
+<hr>
+{% if object.first_name %}
+<p>First Name: {{ object.first_name }}</p>
+{% endif %}
+<p>Date Joined: {{ object.date_joined }}</p>
+{% endblock %}
