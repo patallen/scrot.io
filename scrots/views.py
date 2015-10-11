@@ -7,9 +7,20 @@ from .forms import UrlScrotForm
 from .models import Website, Snapshot
 
 
-class HomePageView(FormView):
+class FormListView(FormView, ListView):
+    """
+    View Mixin that adds a form to a ListView
+    """
+    def get_context_data(self, **data):
+        context = super(FormListView, self).get_context_data(**data)
+        context['form'] = self.get_form(self.form_class)
+        return context
+
+
+class HomePageView(FormListView):
     form_class = UrlScrotForm
     template_name = 'scrots/index.html'
+    queryset = Snapshot.objects.order_by('-date_taken')[:6]
 
     def form_valid(self, form):
         url = form.data['url']
