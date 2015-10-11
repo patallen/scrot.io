@@ -9,8 +9,16 @@
 		<header class="navbar navbar-default">
 			<div class="container">
 				<a class="navbar-brand" href="{% url 'home_page' %}">Scrot.io</a>
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav">
 					<li><a href="{% url 'recent_list' %}">Recent</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="navbar-text">{{ request.user.username }}</li>
+					{% if request.user.is_anonymous %}
+					<li><a href="{% url 'login' %}">log in</a></li>
+					{% else %}
+					<li><a href="{% url 'logout' %}">log out</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</header>
