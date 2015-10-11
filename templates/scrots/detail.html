@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row">
-        <div class="website-img-full col-lg-8">
-            <img src="/media/{{ object.latest_snapshot.img_full }}">
-        </div>
-        <div class="website-info col-lg-4">
-            <h3 class="text-center">{{ object.domain }}</h3>
-            <hr>
-            <p>Snapshots: {{ object.snapshot_set.count }}</p>
-            <p>Latest Snapshot: {{ object.latest_snapshot.date_taken }}</p>
-            <p>Number Watching: ** Need to Add **</p>
-			<p><a href="{% url 'website_timeline' pk=object.id %}">View Timeline</a></p>
-            <div class="snapshot-controls text-center">
-                <a href="#" class="btn btn-primary">Add to Watchlist</a>
-                <a href="#" class="btn btn-success">Add to Collection</a>
-            </div>
-        </div>
+<div class="row">
+	<div class="website-img-full col-sm-8">
+		<img src="/media/{{ object.latest_snapshot.img_full }}">
+	</div>
+	<div class="website-info col-sm-4">
+		<h3 class="text-center">{{ object.domain }}</h3>
+		<hr>
+		<p>Snapshots: {{ object.snapshot_set.count }}</p>
+		<p>Latest Snapshot: {{ object.latest_snapshot.date_taken }}</p>
+		<p>Number Watching: ** Need to Add **</p>
+		<p><a href="{% url 'website_timeline' pk=object.id %}">View Timeline</a></p>
+		<div class="snapshot-controls text-center">
+			<a href="#" class="btn btn-primary">Add to Watchlist</a>
+			<a href="#" class="btn btn-success">Add to Collection</a>
+		</div>
+	</div>
+</div>
 {% endblock %}

@@ -5,21 +5,21 @@
 {% for obj in object_list %}
 <div class="row timeline-row">
 {% if forloop.counter|divisibleby:2 %}
-	<div class="col-lg-6">
+	<div class="col-sm-6">
 		<div class="website-img-full">
 			<a href="{% url 'snapshot_detail' pk=obj.id  %}">
 				<img src="/media/{{ obj.img_screen }}">
 			</a>
 		</div>
 	</div>
-	<div class="col-lg-6 text-center">
+	<div class="col-sm-6 text-center">
 		{{ obj.date_taken }}
 	</div>
 	{% else %}
-	<div class="col-lg-6 text-center">
+	<div class="col-sm-6 text-center">
 		{{ obj.date_taken }}
 	</div>
-	<div class="col-lg-6">
+	<div class="col-sm-6">
 		<div class="website-img-full">
 			<a href="{% url 'snapshot_detail' pk=obj.id  %}">
 				<img src="/media/{{ obj.img_screen }}">
