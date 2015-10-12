@@ -6,4 +6,8 @@
 <p>First Name: {{ object.first_name }}</p>
 {% endif %}
 <p>Date Joined: {{ object.date_joined }}</p>
+
+{% for website in object.watched_websites.all %}
+{{ website.domain }}
+{% endfor %}
 {% endblock %}

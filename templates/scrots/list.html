@@ -12,6 +12,13 @@
                 <div class="scrot-metadata">
                     <a href="http://{{ obj.domain }}/">{{ obj.domain }}</a>
                 </div>
+				<div class="watch">
+					{% if obj in request.user.watched_websites.all %}
+					Watched
+					{% else %}
+					Watch
+					{% endif %}
+				</div>
             </div>
 		</div>
 		{% endfor %}

@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, UserManager
 from django.contrib.auth.models import PermissionsMixin
 
+from scrots.models import Website
+
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(blank=False, unique=True)
@@ -11,6 +13,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     first_name = models.CharField(max_length=128, blank=True)
     last_name = models.CharField(max_length=128, blank=True)
+
+    watched_websites = models.ManyToManyField(
+        Website, related_name='users_watching'
+    )
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -28,3 +34,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.first_name.strip()
+
+    def likes_website(self, website):
+        """
+        Given a Website, return True if user is watching the Website.
+        """
+        watched_websites = self.watched_websites.all()
+        if website in watched_websites:
+            return True
+        return False
