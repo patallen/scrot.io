@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
 
-from .views import ProfileView
+from .views import ProfileView, WatchWebsiteAjaxView
 
 urlpatterns = [
     url(
@@ -16,5 +16,6 @@ urlpatterns = [
     ),
     url(
         r'^user/(?P<username>[\w]+)/$', ProfileView.as_view(), name='user_profile'
-    )
+    ),
+    url(r'^ajax/watch/$', WatchWebsiteAjaxView),
 ]
