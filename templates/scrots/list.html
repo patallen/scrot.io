@@ -6,13 +6,13 @@
 	<div class="row">
 		{% for obj in object_list %}
 		<div class="col-md-4 col-xs-12 col-sm-6">
-            <div class="scrot-box">
+            <div class="scrot-box" data-website-id="{{obj.id }}">
                 <a href="{% url 'website_detail' pk=obj.id %}">
                     <img src="/media/{{ obj.latest_snapshot.img_small }}">
                 </a>
                 <div class="scrot-metadata">
                     <a href="http://{{ obj.domain }}/">{{ obj.domain }}</a>
-					<a href="#">{% user_is_watching obj %}</a>
+                    {% user_is_watching obj %}
                 </div>
             </div>
 		</div>
