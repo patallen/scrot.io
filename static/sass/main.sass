@@ -1,3 +1,4 @@
+$icon-font-path: "/static/components/bootstrap-sass/assets/fonts/bootstrap/"
 @import "../components/bootstrap-sass/assets/stylesheets/bootstrap"
 
 .scrot-box,
@@ -15,10 +16,16 @@
 .scrot-metadata
     display: flex
     align-items: center
-    justify-content: center
+    justify-content: space-between
     min-height: 40px
     height: 40px
     padding: 5px
+
+    i
+      font-size: 1.5em
+      color: lightgray
+      &.watching
+        color: lighten(green, 15)
 
 .website-img-full,
 .website-img-screen

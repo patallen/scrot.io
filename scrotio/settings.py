@@ -93,3 +93,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Form Config
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Custom stuff
+WATCHING_CLASS = 'watching'

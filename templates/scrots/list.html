@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load watching %}
 {% block content %}
 	<h2>Recent Scrots</h2>
 	<hr>
@@ -11,14 +12,8 @@
                 </a>
                 <div class="scrot-metadata">
                     <a href="http://{{ obj.domain }}/">{{ obj.domain }}</a>
+					<a href="#">{% user_is_watching obj %}</a>
                 </div>
-				<div class="watch">
-					{% if obj in request.user.watched_websites.all %}
-					Watched
-					{% else %}
-					Watch
-					{% endif %}
-				</div>
             </div>
 		</div>
 		{% endfor %}
