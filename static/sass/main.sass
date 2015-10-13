@@ -3,6 +3,7 @@ $icon-font-path: "/static/components/bootstrap-sass/assets/fonts/bootstrap/"
 
 .scrot-box,
 .website-img-full
+    position: relative
     img
         width: 100%
         border: 6px solid white
@@ -44,3 +45,20 @@ $icon-font-path: "/static/components/bootstrap-sass/assets/fonts/bootstrap/"
 .address-bar-container
   padding: 80px 0
   padding-bottom: 160px
+
+.overlay
+  display: flex
+  align-items: center
+  justify-content: center
+  position: absolute
+  height: 100%
+  width: 100%
+  top: 0
+  left: 0
+  color: rgba(0,0,0,0)
+  transition: .2s
+  &:hover
+    cursor: pointer
+    color: white
+    font-size: 1.3em
+    background-color: rgba(0,0,0,.6)

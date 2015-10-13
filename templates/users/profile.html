@@ -6,8 +6,20 @@
 <p>First Name: {{ object.first_name }}</p>
 {% endif %}
 <p>Date Joined: {{ object.date_joined }}</p>
-
-{% for website in object.watched_websites.all %}
-{{ website.domain }}
-{% endfor %}
+<h4>Watch List</h4>
+<hr>
+<div class="row">
+	{% for website in object.watched_websites.all %}
+	<div class="col-sm-3">
+		<div class="scrot-box">
+			<a href="{% url 'website_detail' pk=website.id %}">
+				<img src="/media/{{ website.latest_snapshot.img_thumb }}">
+				<div class="overlay">
+					{{ website.domain }}
+				</div>
+			</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
 {% endblock %}
