@@ -1,4 +1,3 @@
-import tempfile
 import unittest
 
 from selenium import webdriver
