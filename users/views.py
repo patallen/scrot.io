@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView
@@ -36,9 +37,22 @@ class RegisterView(CreateView):
     template_name = "users/register.html"
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.set_password(self.object.password)
-        self.object.save()
+        try:
+            self.object = form.save(commit=False)
+            self.object.set_password(self.object.password)
+            self.object.save()
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                "Success! You man now log in."
+            )
+        except:
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                "There was a problem creating your account."
+            )
+            return redirect("user_registration")
         return super(RegisterView, self).form_valid(form)
 
 

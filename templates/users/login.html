@@ -2,9 +2,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="col-lg-4 col-lg-offset-4">
-	{% if form.errors %}
-	ERRORS
-	{% endif %}
 	<form action='.' method="POST">
 		{% csrf_token %}
 		{{ form | crispy }}
