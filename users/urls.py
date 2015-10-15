@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout
 
-from .views import ProfileView, WatchWebsiteAjaxView
+from .views import ProfileView, WatchWebsiteAjaxView, RegisterView
 
 urlpatterns = [
     url(
@@ -14,8 +14,11 @@ urlpatterns = [
         {'next_page': '/'},
         name='logout',
     ),
+    url(r'^register/$', RegisterView.as_view(), name="user_registration"),
     url(
-        r'^user/(?P<username>[\w]+)/$', ProfileView.as_view(), name='user_profile'
+        r'^user/(?P<username>[\w]+)/$',
+        ProfileView.as_view(),
+        name='user_profile'
     ),
     url(r'^ajax/watch/$', WatchWebsiteAjaxView),
 ]

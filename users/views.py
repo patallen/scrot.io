@@ -3,9 +3,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 from django.views.generic import DetailView
+from django.views.generic.edit import CreateView
 from django.http import Http404,  HttpResponseForbidden, HttpResponse
 
 from .models import CustomUser
+from .forms import RegistrationForm
 from scrots.models import Website
 
 
@@ -26,6 +28,19 @@ class ProfileView(DetailView):
                           {'verbose_name': queryset.model._meta.verbose_name})
 
         return obj
+
+
+class RegisterView(CreateView):
+    form_class = RegistrationForm
+    success_url = "/login/"
+    template_name = "users/register.html"
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.set_password(self.object.password)
+        self.object.save()
+        return super(RegisterView, self).form_valid(form)
+
 
 @login_required
 @csrf_exempt

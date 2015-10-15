@@ -16,6 +16,7 @@
 					<li class="navbar-text">{{ request.user.username }}</li>
 					{% if request.user.is_anonymous %}
 					<li><a href="{% url 'login' %}">log in</a></li>
+					<li><a href="{% url 'user_registration' %}">register</a></li>
 					{% else %}
 					<li><a href="{% url 'logout' %}">log out</a></li>
 					{% endif %}
