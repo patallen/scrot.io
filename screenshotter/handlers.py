@@ -79,3 +79,9 @@ class ScrotHandler:
         self.crop()
         self.small()
         self.thumb()
+
+    def get_colors(self):
+        result = self.thumb.convert('P', palette=Image.ADAPTIVE, colors=8).convert("RGB")
+        colors = sorted(result.getcolors(), key=lambda tup: -tup[0])
+        colors = [col[1] for col in colors]
+        return colors
