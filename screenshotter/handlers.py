@@ -81,7 +81,11 @@ class ScrotHandler:
         self.thumb()
 
     def get_colors(self):
-        result = self.thumb.convert('P', palette=Image.ADAPTIVE, colors=8).convert("RGB")
+        result = self.thumb.convert(
+            'P',
+            palette=Image.ADAPTIVE,
+            colors=8
+        ).convert("RGB")
         colors = sorted(result.getcolors(), key=lambda tup: -tup[0])
         colors = [col[1] for col in colors]
         hex_colors = [('#%02x%02x%02x' % rgb) for rgb in colors]

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from screenshotter.handlers import ScrotHandler
 
 
@@ -37,6 +38,7 @@ class Snapshot(models.Model):
     img_screen = models.ImageField(blank=False)
     img_small = models.ImageField(blank=False)
     img_thumb = models.ImageField(blank=False)
+    palette = ArrayField(ArrayField(models.CharField(max_length=7), size=8))
 
     def __str__(self):
         date = self.date_taken.strftime('%m-%d-%Y')
