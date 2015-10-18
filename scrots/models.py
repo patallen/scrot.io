@@ -23,6 +23,7 @@ class Website(models.Model):
         snapshot.img_screen = hdl.screen_fn
         snapshot.img_small = hdl.small_fn
         snapshot.img_thumb = hdl.thumb_fn
+        snapshot.palette = hdl.get_colors()
         snapshot.save()
 
     def admin_thumb(self):
@@ -38,7 +39,8 @@ class Snapshot(models.Model):
     img_screen = models.ImageField(blank=False)
     img_small = models.ImageField(blank=False)
     img_thumb = models.ImageField(blank=False)
-    palette = ArrayField(ArrayField(models.CharField(max_length=7), size=8))
+    palette = ArrayField(models.CharField(max_length=7), size=8, default=None, null=True)
+    
 
     def __str__(self):
         date = self.date_taken.strftime('%m-%d-%Y')

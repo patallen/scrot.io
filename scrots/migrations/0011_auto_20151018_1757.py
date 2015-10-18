@@ -8,14 +8,13 @@ import django.contrib.postgres.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('scrots', '0006_delete_scrot'),
+        ('scrots', '0010_auto_20151018_1755'),
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='snapshot',
             name='palette',
-            field=django.contrib.postgres.fields.ArrayField(size=None, default=[], base_field=django.contrib.postgres.fields.ArrayField(size=8, base_field=models.CharField(max_length=7)), blank=True),
-            preserve_default=False,
+            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=7), null=True, size=8, default=None),
         ),
     ]
