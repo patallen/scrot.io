@@ -31,7 +31,7 @@ class HomePageView(FormListView):
         return super(HomePageView, self).form_valid(form)
 
     def get_success_url(self):
-        url = reverse('website_detail', kwargs={'pk': self.website.id})
+        url = reverse('snapshot_detail', kwargs={'pk': self.website.latest_snapshot().id})
         return url
 
 
