@@ -39,8 +39,10 @@ class Snapshot(models.Model):
     img_screen = models.ImageField(blank=False)
     img_small = models.ImageField(blank=False)
     img_thumb = models.ImageField(blank=False)
-    palette = ArrayField(models.CharField(max_length=7), size=8, default=None, null=True)
-    
+    palette = ArrayField(
+        models.CharField(max_length=7),
+        size=8, default=None, null=True
+    )
 
     def __str__(self):
         date = self.date_taken.strftime('%m-%d-%Y')

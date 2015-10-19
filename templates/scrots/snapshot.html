@@ -11,10 +11,18 @@
             <p>In collections: ** Need to Add **</p>
 			<p><a href="{% url 'website_timeline' pk=object.website.id %}">Back to Timeline</a></p>
 			<p><a href="{% url 'website_detail' pk=object.website.id %}">Back to Website</a></p>
-            <div class="snapshot-controls text-center">
-                <a href="#" class="btn btn-primary">Add to Favorites</a>
-                <a href="#" class="btn btn-success">Add to Collection</a>
-            </div>
+			<div class="row">
+				<div class="color-palette col-xs-12">
+					{% for color in object.palette %}
+					<div class="palette-box" title="{{ color }}" style="height: 20px; width: 20px; background: {{ color }}">
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="snapshot-controls text-center">
+				<a href="#" class="btn btn-primary">Add to Favorites</a>
+				<a href="#" class="btn btn-success">Add to Collection</a>
+			</div>
         </div>
 	</div>
 {% endblock %}
