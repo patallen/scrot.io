@@ -27,7 +27,11 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 1. `$ ./manage.py runserver 0:8000`
 
 ## TODO:
+- [ ] Snapshot error handling and timeout
+- [ ] Download / Copy palette
+- [ ] Website information (crawl, whois, metadata)
+- [ ] AJAX CSRF
 - [ ] Collections
-- [ ] Watch Lists
-- [ ] Registration
 - [ ] Take Snapshot from website_detail
+- [x] Watch Lists
+- [x] Registration
