@@ -1,6 +1,20 @@
+import os
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.conf import settings
+from django.db.models.signals import post_delete
 from screenshotter.handlers import ScrotHandler
+
+
+def delete_snapshot_images(sender, instance, **kwargs):
+    base = settings.MEDIA_ROOT
+    try:
+        os.remove('{}/{}'.format(base, instance.img_full))
+        os.remove('{}/{}'.format(base, instance.img_screen))
+        os.remove('{}/{}'.format(base, instance.img_thumb))
+        os.remove('{}/{}'.format(base, instance.img_small))
+    except:
+        print("Trouble deleting one or more snapshot images.")
 
 
 class Website(models.Model):
@@ -48,6 +62,9 @@ class Snapshot(models.Model):
     def __str__(self):
         date = self.date_taken.strftime('%m-%d-%Y')
         return '{} on {}'.format(str(self.website).capitalize(), date)
+
+    post_delete.connect(delete_snapshot_images)
+
 
     class Meta:
         get_latest_by = 'date_taken'
