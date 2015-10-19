@@ -27,11 +27,12 @@ class HomePageView(FormListView):
         scrot = ScrotHandler(url)
         domain = scrot.domain
         self.website, _ = Website.objects.get_or_create(domain=domain)
-        self.website.add_snapshot()
+        self.snapshot = self.website.add_snapshot()
         return super(HomePageView, self).form_valid(form)
 
     def get_success_url(self):
-        url = reverse('snapshot_detail', kwargs={'pk': self.website.latest_snapshot().id})
+        url = reverse('snapshot_detail',
+                      kwargs={'pk': self.snapshot.id})
         return url
 
 

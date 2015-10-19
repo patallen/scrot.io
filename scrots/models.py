@@ -25,6 +25,7 @@ class Website(models.Model):
         snapshot.img_thumb = hdl.thumb_fn
         snapshot.palette = hdl.get_colors()
         snapshot.save()
+        return snapshot
 
     def admin_thumb(self):
         thumb = self.latest_snapshot().img_thumb
