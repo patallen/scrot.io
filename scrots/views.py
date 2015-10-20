@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
 
@@ -44,6 +45,12 @@ class RecentScrotsView(ListView):
 class WebsiteDetailView(DetailView):
     template_name = 'scrots/detail.html'
     queryset = Website.objects.all()
+
+
+class WebsiteListView(ListView):
+    template_name = 'scrots/popular_list.html'
+    queryset = (Website.objects.annotate(num_children=Count('snapshot'))
+                               .order_by('-num_children'))
 
 
 class TimelineView(ListView):
