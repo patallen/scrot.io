@@ -1,7 +1,10 @@
 import os
+from django.utils import timezone
+from datetime import timedelta
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_delete
 from screenshotter.handlers import ScrotHandler
 
@@ -40,6 +43,25 @@ class Website(models.Model):
         snapshot.palette = hdl.get_colors()
         snapshot.save()
         return snapshot
+
+    def add_snapshot_or_return_latest(self, is_new):
+        """
+        Checks that the latest_snapshot is greater than one day old or
+        that is_new is True. If so, it returns a new snapshot, else returns
+        latest snapshot
+        """
+        time_limit = timezone.now() - timedelta(days=1)
+        try:
+            last_taken = self.latest_snapshot().date_taken
+        except ObjectDoesNotExist:
+            last_taken = None
+
+        if is_new or last_taken < time_limit:
+            if is_new:
+                self.save()
+            return self.add_snapshot()
+        else:
+            return self.latest_snapshot()
 
     def admin_thumb(self):
         thumb = self.latest_snapshot().img_thumb
