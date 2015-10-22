@@ -33,6 +33,11 @@ class Website(models.Model):
         return self.snapshot_set.latest()
 
     def add_snapshot(self):
+        """
+        Uses screenshotter library to take and save screenshot, and
+        resized versions of domain's website, save their filepaths to the
+        database, finds the color palette, and returns the snapshot.
+        """
         hdl = ScrotHandler(self.domain)
         hdl.create_images()
         snapshot = self.snapshot_set.create()
@@ -64,6 +69,9 @@ class Website(models.Model):
             return self.latest_snapshot()
 
     def admin_thumb(self):
+        """
+        Returns image HTML to be used in the django-admin interface.
+        """
         thumb = self.latest_snapshot().img_thumb
         return '<img src="/media/{}" width=100>'.format(thumb)
     admin_thumb.allow_tags = True
