@@ -15,7 +15,7 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 1. `$ gulp sass:watch`
 
 ## Set up database
-1. Create database
+1. Create postgres database
 1. Add user with only createdb premission
 1. Give the user a password
 1. Grant all privileges on database
@@ -27,6 +27,10 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 1. `$ ./manage.py runserver 0:8000`
 
 ## TODO:
+- [ ] Allow one snapshot per day
+- [ ] Better user registration
+- [ ] Email notifications
+- [ ] Activity Stream
 - [ ] Snapshot error handling and timeout
 - [ ] Download / Copy palette
 - [ ] Website information (crawl, whois, metadata)
