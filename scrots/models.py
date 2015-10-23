@@ -1,11 +1,13 @@
 import os
-from django.utils import timezone
 from datetime import timedelta
-from django.db import models
-from django.contrib.postgres.fields import ArrayField
+
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import models
 from django.db.models.signals import post_delete
+from django.utils import timezone
+
 from screenshotter.handlers import ScrotHandler
 
 
@@ -95,6 +97,16 @@ class Snapshot(models.Model):
 
     post_delete.connect(delete_snapshot_images)
 
-
     class Meta:
         get_latest_by = 'date_taken'
+
+
+class Collection(models.Model):
+    owner = models.ForeignKey('users.CustomUser')
+    title = models.CharField(max_length=128, default="Unnamed")
+    description = models.CharField(max_length=512, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{} {}'.format(self.title, self.owner.username)

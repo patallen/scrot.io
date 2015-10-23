@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db.models import Count
-from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 
 from screenshotter.handlers import ScrotHandler
 from .forms import UrlScrotForm
@@ -27,7 +27,7 @@ class HomePageView(FormListView):
         url = form.data['url']
         scrot = ScrotHandler(url)
         domain = scrot.domain
-        self.website, is_new  = Website.objects.get_or_create(domain=domain)
+        self.website, is_new = Website.objects.get_or_create(domain=domain)
         self.snapshot = self.website.add_snapshot_or_return_latest(is_new)
         return super(HomePageView, self).form_valid(form)
 
