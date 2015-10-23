@@ -27,7 +27,7 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 1. `$ ./manage.py runserver 0:8000`
 
 ## TODO:
-- [ ] Allow one snapshot per day
+
 - [ ] Better user registration
 - [ ] Email notifications
 - [ ] Activity Stream
@@ -37,5 +37,6 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 - [ ] AJAX CSRF
 - [ ] Collections
 - [ ] Take Snapshot from website_detail
+- [x] Allow one snapshot per day
 - [x] Watch Lists
 - [x] Registration
