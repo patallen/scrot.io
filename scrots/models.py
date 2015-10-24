@@ -104,6 +104,9 @@ class Snapshot(models.Model):
 class Collection(models.Model):
     owner = models.ForeignKey('users.CustomUser')
     title = models.CharField(max_length=128, default="Unnamed")
+    snapshots = models.ManyToManyField(
+        Snapshot, related_name='collections'
+    )
     description = models.CharField(max_length=512, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
