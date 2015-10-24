@@ -8,6 +8,9 @@
 <p>Date Joined: {{ object.date_joined }}</p>
 <h4>Watch List</h4>
 <hr>
+{% if not object.watched_websites.all %}
+<h5>You do not have any Websites in your Watch List</h5>
+{% endif %}
 <div class="row">
 	{% for website in object.watched_websites.all %}
 	<div class="col-sm-3">
@@ -16,6 +19,30 @@
 				<img src="/media/{{ website.latest_snapshot.img_thumb }}">
 				<div class="overlay">
 					{{ website.domain }}
+				</div>
+			</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<h4>Collections</h4>
+<hr>
+{% if not object.collection_set.all %}
+<h5>You do not have any Collections</h5>
+{% endif %}
+<div class="row">
+	{% for collection in object.collection_set.all %}
+	<div class="col-sm-3">
+		<div class="scrot-box">
+            <a href="">
+                {% if not collection.snapshots.all %}
+                <img src="http://dummyimage.com/500x300/fff/000.png&text=No+Snapshots">
+                {% else %}
+				<img src="/media/{{ collection.snapshots.first.img_thumb }}">
+                {% endif %}
+				<div class="overlay">
+                    <h5>{{ collection.title }}</h5>
 				</div>
 			</a>
 		</div>
