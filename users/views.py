@@ -57,7 +57,6 @@ class RegisterView(CreateView):
 
 
 @login_required
-@csrf_exempt
 def WatchWebsiteAjaxView(request):
     if request.method == "POST":
         website_id = request.POST.get('website_id', None)
