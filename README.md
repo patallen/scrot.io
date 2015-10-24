@@ -34,11 +34,11 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 - [ ] Snapshot error handling and timeout
 - [ ] Download / Copy palette
 - [ ] Website information (crawl, whois, metadata)
-- [ ] AJAX CSRF
 - [ ] Take Snapshot from website_detail
-- [x] Collections
 - [ ] Add to collection button/dropdown
 - [ ] Take Snapshot from website_detail
+- [ ] Add to collection
+- [x] AJAX CSRF
 - [x] Collection Model
 - [x] Allow one snapshot per day
 - [x] Watch Lists
