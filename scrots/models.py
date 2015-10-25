@@ -110,7 +110,15 @@ class Collection(models.Model):
     description = models.CharField(max_length=512, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    num_snapshots = models.IntegerField(default=0)
 
+    def add_snapshot(self, snapshot):
+        self.snapshots.add(snapshot)
+        self.num_snapshots = self.snapshots.count()
+
+    def remove_snapshot(self, snapshot):
+        self.snapshots.remove(snapshot)
+        self.num_snapshots = self.snapshots.count()
 
     def __str__(self):
         return '{} {}'.format(self.title, self.owner.username)
