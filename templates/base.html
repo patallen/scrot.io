@@ -8,6 +8,7 @@
 	<body>
     <div class="collections-modal">
         <div class="collections-modal-inner">
+            <span class="close-modal-btn">X</span>
             {% for collection in request.user.collection_set.all %}
             <div class="collection-box" data-collection-id="{{ collection.id }}">
                 {{ collection.title }}
@@ -47,5 +48,6 @@
         <script src="{% static 'components/jquery/dist/jquery.js' %}"></script>
         <script src="{% static 'js/csrf.js' %}"></script>
         <script src="{% static 'js/ajax.js' %}"></script>
+        <script src="{% static 'js/collections.js' %}"></script>
 	</body>
 </html>
