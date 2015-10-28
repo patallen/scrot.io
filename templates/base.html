@@ -13,11 +13,15 @@
         <div class="collections-modal">
             <div class="collections-modal-inner">
                 <span class="close-modal-btn">X</span>
-                {% for collection in request.user.collection_set.all %}
-                <div class="collection-box" data-collection-id="{{ collection.id }}">
-                    {{ collection.title }}
-                </div>
-                {% endfor %}
+                {% if not request.user.collection_set.all %}
+                You do not have any collections. <a href="{% url 'user_profile' request.user.username %}">Click here</a> to create some.
+                {% else %}
+                    {% for collection in request.user.collection_set.all %}
+                    <div class="collection-box" data-collection-id="{{ collection.id }}">
+                        {{ collection.title }}
+                    </div>
+                    {% endfor %}
+                {%endif %}
             </div>
         </div>
         <!-- End Modal -->
