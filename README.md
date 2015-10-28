@@ -36,8 +36,8 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 - [ ] Website information (crawl, whois, metadata)
 - [ ] Take Snapshot from website_detail
 - [ ] Add to collection button/dropdown
-- [ ] Take Snapshot from website_detail
-- [ ] Add to collection
+- [ ] Collection detail page
+- [x] Add sticky footer
 - [x] AJAX CSRF
 - [x] Collection Model
 - [x] Allow one snapshot per day
