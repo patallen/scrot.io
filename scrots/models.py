@@ -51,6 +51,7 @@ class Website(models.Model):
         snapshot.palette = hdl.get_colors()
         snapshot.save()
         self.snapshot_count = self.snapshot_set.count()
+        self.save()
         return snapshot
 
     def add_snapshot_or_return_latest(self, is_new):
