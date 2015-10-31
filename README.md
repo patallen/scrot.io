@@ -27,6 +27,8 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 1. `$ ./manage.py runserver 0:8000`
 
 ## TODO:
+- [ ] Snapshot Views
+- [ ] Snapshot Likes
 - [ ] AJAX take screenshot
 - [ ] Better user registration
 - [ ] Email notifications
@@ -37,6 +39,7 @@ Take screenshots of the homepage of any website. Share them, tag them, organize 
 - [ ] Take Snapshot from website_detail
 - [ ] Add to collection button/dropdown
 - [ ] Collection detail page
+- [ ] Website snapshot count
 - [x] Add sticky footer
 - [x] AJAX CSRF
 - [x] Collection Model
