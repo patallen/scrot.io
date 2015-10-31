@@ -27,6 +27,7 @@ class Website(models.Model):
     link_to_home = models.URLField()
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
+    snapshot_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.domain
@@ -49,6 +50,7 @@ class Website(models.Model):
         snapshot.img_thumb = hdl.thumb_fn
         snapshot.palette = hdl.get_colors()
         snapshot.save()
+        self.snapshot_count = self.snapshot_set.count()
         return snapshot
 
     def add_snapshot_or_return_latest(self, is_new):
