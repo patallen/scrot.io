@@ -6,10 +6,10 @@
 		<title>{% block title %}Home Page Screenshots{% endblock %} - Scrot.io</title>
 	</head>
 	<body>
-
         <!-- ---------------------------------------------------- -->
         <!-- This modal pops when "add to collection" is selected -->
         <!-- ---------------------------------------------------- -->
+        {% if not request.user.is_anonymous %}
         <div class="collections-modal">
             <div class="collections-modal-inner">
                 <span class="close-modal-btn">X</span>
@@ -24,6 +24,7 @@
                 {%endif %}
             </div>
         </div>
+        {% endif %}
         <!-- End Modal -->
 
 		<header class="navbar navbar-default">
