@@ -31,6 +31,6 @@ urlpatterns = [
     url(
         r'^collections/(?P<pk>[0-9]+)/$',
         CollectionSnapshotsView.as_view(),
-        name='collection_snapshots'
+        name='collection_detail'
     ),
 ]

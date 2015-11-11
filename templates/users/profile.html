@@ -35,7 +35,7 @@
 	{% for collection in object.collection_set.all %}
 	<div class="col-sm-3">
 		<div class="scrot-box">
-            <a href="">
+            <a href="{% url 'collection_detail' pk=collection.id %}">
                 {% if not collection.snapshots.all %}
                 <img src="http://dummyimage.com/500x300/fff/000.png&text=No+Snapshots">
                 {% else %}
