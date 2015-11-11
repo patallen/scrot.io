@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from .views import (
     HomePageView, RecentScrotsView, WebsiteDetailView,
-    TimelineView, SnapshotDetailView, WebsiteListView
+    TimelineView, SnapshotDetailView, WebsiteListView,
+    CollectionSnapshotsView
 )
 
 urlpatterns = [
@@ -26,5 +27,10 @@ urlpatterns = [
         r'^websites/$',
         WebsiteListView.as_view(),
         name='website_list'
+    ),
+    url(
+        r'^collections/(?P<pk>[0-9]+)/$',
+        CollectionSnapshotsView.as_view(),
+        name='collection_snapshots'
     ),
 ]

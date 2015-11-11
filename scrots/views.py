@@ -5,7 +5,7 @@ from django.views.generic.edit import FormView
 
 from screenshotter.handlers import ScrotHandler
 from .forms import UrlScrotForm
-from .models import Website, Snapshot
+from .models import Website, Snapshot, Collection
 
 
 class FormListView(FormView, ListView):
@@ -73,3 +73,8 @@ class TimelineView(ListView):
 class SnapshotDetailView(DetailView):
     model = Snapshot
     template_name = 'scrots/snapshot.html'
+
+
+class CollectionSnapshotsView(DetailView):
+    model = Collection
+    template_name = 'scrots/collection.html'

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Collection: {{ object.title }}</h2>
+	<hr>
+	<div class="row">
+		{% for obj in object.snapshots.all %}
+		<div class="col-md-4 col-xs-12 col-sm-6">
+            <div class="scrot-box" data-website-id="{{ obj.id }}">
+                <a href="{% url 'snapshot_detail' pk=obj.id %}">
+                    <img src="/media/{{ obj.img_small }}">
+                </a>
+                <div class="scrot-metadata">
+                    <a href="http://{{ obj.website.domain }}/">{{ obj.website.domain }}</a>
+                    {{ obj.snapshot_count }}
+                </div>
+            </div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}
