@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Collection: {{ object.title }}</h2>
+    <p>Created: {{ object.date_created }}</p>
+    <p>{{ object.description }}</p>
 	<hr>
 	<div class="row">
 		{% for obj in object.snapshots.all %}
