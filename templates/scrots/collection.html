@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load strftime %}
 {% block content %}
     <h2>Collection: {{ object.title }}</h2>
-    <p>Created: {{ object.date_created }}</p>
+    <p>Created: {{ object.date_created | format:"%B %d, %Y" }}</p>
     <p>{{ object.description }}</p>
 	<hr>
 	<div class="row">
