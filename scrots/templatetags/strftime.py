@@ -6,6 +6,6 @@ register = template.Library()
 @register.filter(name="format")
 def format_date(date, date_format):
     """
-    Template tag that returns the HTML for the watching icon for Websites.
+    Template tag filter takes a strftime string and returns the formated date
     """
     return date.strftime(date_format)
