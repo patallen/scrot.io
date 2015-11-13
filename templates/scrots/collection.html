@@ -3,6 +3,8 @@
 {% block content %}
     <h2>Collection: {{ object.title }}</h2>
     <p>Created: {{ object.date_created | format:"%B %d, %Y" }}</p>
+    <p>Updated: {{ object.date_updated | format:"%B %d, %Y" }}</p>
+    <p>There are {{ object.num_snapshots }} in this collection.</p>
     <p>{{ object.description }}</p>
 	<hr>
 	<div class="row">
