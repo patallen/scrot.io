@@ -12,10 +12,14 @@ apt_packages = [
     'git',
     'vim',
     'nginx',
+    'python-pip',
+    'python-dev',
     'python3',
     'python3-dev',
-    'python-pip',
     'postgresql',
+    'postgresql-contrib',
+    'postgresql-server-dev-all',
+    'libffi-dev',
 ]
 pip_packages = ['virtualenv', 'virtualenvwrapper']
 
